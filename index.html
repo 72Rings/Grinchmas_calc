@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grinchmas Block Scorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 class="title">Grinchmas Block Scorer</h1>
+
+  <!-- BOARD LAYOUT -->
+  <div class="board">
+
+    <!-- TOP ROW: start + houses + ? + grinch + end -->
+    <div class="cell start top">$TART</div>
+
+    <!-- 8 houses in board order (updated to O,P,R,Y,O,P,R,Y) -->
+    <div class="cell house top orange" data-house-index="0" data-house-color="orange">Orange 1</div>
+    <div class="cell house top pink"   data-house-index="1" data-house-color="pink">Pink 1</div>
+    <div class="cell house top red"    data-house-index="2" data-house-color="red">Red 1</div>
+    <div class="cell house top yellow" data-house-index="3" data-house-color="yellow">Yellow 1</div>
+    <div class="cell house top orange" data-house-index="4" data-house-color="orange">Orange 2</div>
+    <div class="cell house top pink"   data-house-index="5" data-house-color="pink">Pink 2</div>
+    <div class="cell house top red"    data-house-index="6" data-house-color="red">Red 2</div>
+    <div class="cell house top yellow" data-house-index="7" data-house-color="yellow">Yellow 2</div>
+
+    <div class="cell mystery top">?</div>
+    <div class="cell grinch top">GRINCH</div>
+    <div class="cell end top">END</div>
+
+    <!-- BOTTOM ROW -->
+    <div class="cell start bottom"></div>
+
+    <!-- summaries under each house -->
+    <div class="cell summary bottom orange" data-house-index="0" id="summary-0" data-house-color="orange"></div>
+    <div class="cell summary bottom pink"   data-house-index="1" id="summary-1" data-house-color="pink"></div>
+    <div class="cell summary bottom red"    data-house-index="2" id="summary-2" data-house-color="red"></div>
+    <div class="cell summary bottom yellow" data-house-index="3" id="summary-3" data-house-color="yellow"></div>
+    <div class="cell summary bottom orange" data-house-index="4" id="summary-4" data-house-color="orange"></div>
+    <div class="cell summary bottom pink"   data-house-index="5" id="summary-5" data-house-color="pink"></div>
+    <div class="cell summary bottom red"    data-house-index="6" id="summary-6" data-house-color="red"></div>
+    <div class="cell summary bottom yellow" data-house-index="7" id="summary-7" data-house-color="yellow"></div>
+
+    <div class="cell mystery bottom"></div>
+    <div class="cell grinch bottom"></div>
+    <div class="cell end bottom"></div>
+  </div>
+
+  <!-- QUICK ADD BY HOUSE COLOR -->
+ <div class="quick-panel">
+  <h2>Quick Add by House Color</h2>
+  <p>These add items/multipliers to <strong>both houses</strong> of that color.</p>
+  <div class="quick-buttons">
+    <button class="btn-color" data-color="yellow">Yellow Houses</button>
+    <button class="btn-color" data-color="red">Red Houses</button>
+    <button class="btn-color" data-color="orange">Orange Houses</button>
+    <button class="btn-color" data-color="pink">Pink Houses</button>
+  </div>
+</div>
+
+  <!-- TOTAL DISPLAY -->
+  <div class="total-wrapper">
+    <button id="btn-score-round">Score Round</button>
+    <div class="total-label">Total Points:</div>
+    <div id="total-points" class="total-points">0</div>
+  </div>
+
+  <!-- HOUSE / COLOR EDIT MODAL -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 id="modal-title">House</h2>
+
+      <div id="section-items" class="modal-section">
+        <h3>Items</h3>
+        <label>
+          Red Gifts:
+          <input type="number" id="inp-redGift" min="0">
+        </label>
+        <label>
+          Blue Gifts:
+          <input type="number" id="inp-blueGift" min="0">
+        </label>
+        <label>
+          Red Ornaments:
+          <input type="number" id="inp-redOrn" min="0">
+        </label>
+        <label>
+          Blue Ornaments:
+          <input type="number" id="inp-blueOrn" min="0">
+        </label>
+      </div>
+
+      <div id="section-cards" class="modal-section">
+        <h3>Multiplier Cards</h3>
+        <label>
+          x3 for RED items:
+          <input type="number" id="inp-x3RedAll" min="0">
+        </label>
+        <label>
+          x2 for BLUE items:
+          <input type="number" id="inp-x2BlueAll" min="0">
+        </label>
+        <label>
+          x4 for RED gifts:
+          <input type="number" id="inp-x4RedGift" min="0">
+        </label>
+      </div>
+
+      <!-- Color-only permanent bonuses (hidden by default; shown for color-shortcut modal) -->
+      <div id="section-color-bonuses" class="modal-section hidden">
+        <h3>Permanent Color Bonuses</h3>
+        <p class="help">Click a bubble to toggle a permanent bonus ON/OFF for this color. When ON that item gets +1 base value at all houses of this color.</p>
+
+        <div class="color-bonus-row" data-item="redGift">
+          <label>Red Gifts:</label>
+          <button id="bonus-btn-redGift" class="btn-bonus-toggle" data-item="redGift" aria-pressed="false">OFF</button>
+        </div>
+
+        <div class="color-bonus-row" data-item="blueGift">
+          <label>Blue Gifts:</label>
+          <button id="bonus-btn-blueGift" class="btn-bonus-toggle" data-item="blueGift" aria-pressed="false">OFF</button>
+        </div>
+
+        <div class="color-bonus-row" data-item="redOrn">
+          <label>Red Ornaments:</label>
+          <button id="bonus-btn-redOrn" class="btn-bonus-toggle" data-item="redOrn" aria-pressed="false">OFF</button>
+        </div>
+
+        <div class="color-bonus-row" data-item="blueOrn">
+          <label>Blue Ornaments:</label>
+          <button id="bonus-btn-blueOrn" class="btn-bonus-toggle" data-item="blueOrn" aria-pressed="false">OFF</button>
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button id="btn-cancel">Cancel</button>
+        <button id="btn-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
