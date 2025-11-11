@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grinchmas Score Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎄 Grinchmas Score Calculator 🎄</h1>
+            <p>Calculate your round points quickly and easily!</p>
+        </header>
+
+        <div class="calculator">
+            <div class="score-section">
+                <h2>Base Points</h2>
+                <div class="input-group">
+                    <label for="basePoints">Base Points:</label>
+                    <input type="number" id="basePoints" value="0" min="0">
+                </div>
+            </div>
+
+            <div class="score-section">
+                <h2>Bonuses</h2>
+                <div class="input-group">
+                    <label for="presentBonus">Present Collection Bonus:</label>
+                    <input type="number" id="presentBonus" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="ornamentBonus">Ornament Bonus:</label>
+                    <input type="number" id="ornamentBonus" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="stockingBonus">Stocking Bonus:</label>
+                    <input type="number" id="stockingBonus" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="candyCaneBonus">Candy Cane Bonus:</label>
+                    <input type="number" id="candyCaneBonus" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="grinchBonus">Grinch Challenge Bonus:</label>
+                    <input type="number" id="grinchBonus" value="0" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="whovilleBonus">Whoville Bonus:</label>
+                    <input type="number" id="whovilleBonus" value="0" min="0">
+                </div>
+            </div>
+
+            <div class="score-section">
+                <h2>Multipliers</h2>
+                <div class="input-group">
+                    <label for="multiplier">Score Multiplier:</label>
+                    <select id="multiplier">
+                        <option value="1">1x (No Multiplier)</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2">2x (Double)</option>
+                        <option value="3">3x (Triple)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="total-section">
+                <h2>Total Score</h2>
+                <div class="total-display" id="totalScore">0</div>
+                <button class="reset-button" id="resetButton">Reset All</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Live calculator - your score updates automatically as you enter values</p>
+        </footer>
+    </div>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
